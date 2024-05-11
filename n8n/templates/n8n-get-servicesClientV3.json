@@ -1,0 +1,99 @@
+{
+  "name": "GET-servicesClientV3",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "cea723d4-a895-4462-880d-fc5d0b2bd387",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "eef6e586-622c-43d1-a9af-b5040973d51c",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        20
+      ],
+      "webhookId": "cea723d4-a895-4462-880d-fc5d0b2bd387"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "16hpBbpFffx7JhLPext35vDEvHkM4MbxfWs_UlAm5JoQ",
+          "mode": "list",
+          "cachedResultName": "database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16hpBbpFffx7JhLPext35vDEvHkM4MbxfWs_UlAm5JoQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Citas_Clientes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16hpBbpFffx7JhLPext35vDEvHkM4MbxfWs_UlAm5JoQ/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "phone",
+              "lookupValue": "={{ $json.query.phone }}"
+            }
+          ]
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange"
+            }
+          }
+        }
+      },
+      "id": "a4b75889-ddea-4feb-8dae-295963400772",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.3,
+      "position": [
+        -180,
+        20
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "sVTysHUmvid88adA",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f15a3a6e-6e52-4e31-b592-7e571bfbc672",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ead19e1a6cc5e0d6bde0bef1bc450606d38ab2a496ca615217fa50ce4b2807a5"
+  },
+  "id": "Se4FILQrfbxQ01IX",
+  "tags": []
+}

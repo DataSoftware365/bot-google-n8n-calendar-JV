@@ -1,0 +1,87 @@
+{
+  "name": "Add-google-calendar-V3",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "add-calendar-boot-v3",
+        "responseMode": "lastNode",
+        "responseData": "allEntries",
+        "options": {}
+      },
+      "id": "03c10a70-d4ae-4f8f-a3e6-616fda680d12",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        120,
+        80
+      ],
+      "webhookId": "0c502460-e00c-462b-97a0-a4a8fb23bd59"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "={{ $json[\"body\"][\"calendario\"] }}",
+          "mode": "id"
+        },
+        "start": "={{ $json[\"body\"][\"startDate\"] }}",
+        "end": "={{ (() => {\n    const gap = 45\n    const startDate = new Date($json[\"body\"][\"startDate\"]);\n    const endDate = new Date($json[\"body\"][\"endDate\"]);\n\n    const formatNumber = (num) => (num < 10 ? '0' : '') + num;\n\n    const formattedDate = endDate.getFullYear() + '/' +\n        formatNumber(endDate.getMonth() + 1) + '/' +\n        formatNumber(endDate.getDate()) + ' ' +\n        formatNumber(endDate.getHours()) + ':' +\n        formatNumber(endDate.getMinutes()) + ':' +\n        formatNumber(endDate.getSeconds());\n\n    return formattedDate;\n})() }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ $json[\"body\"][\"email\"] }}"
+          ],
+          "description": "={{ $json[\"body\"][\"name\"] }} ha solicitado los siguentes servicios {{ $json[\"body\"][\"servicio\"] }} para el dia agendado",
+          "summary": "=Nueva Reunion con {{ $json[\"body\"][\"name\"] }}"
+        }
+      },
+      "id": "6f3fbd31-e9f6-4702-8d7a-6a90b8cc5189",
+      "name": "Google Calendar",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.1,
+      "position": [
+        300,
+        80
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "yiF1M13T10qzvUgi",
+          "name": "Google Calendar account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "daf19241-21b9-45b1-b62c-03e54dcf8caa",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ead19e1a6cc5e0d6bde0bef1bc450606d38ab2a496ca615217fa50ce4b2807a5"
+  },
+  "id": "aPFhgqjgNB40ZMsV",
+  "tags": [
+    {
+      "createdAt": "2024-05-03T18:41:38.709Z",
+      "updatedAt": "2024-05-03T18:41:38.709Z",
+      "id": "sgPfkrs2qYDVGkmy",
+      "name": "Peluquerias V3-POST"
+    }
+  ]
+}

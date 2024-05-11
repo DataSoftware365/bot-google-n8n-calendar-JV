@@ -1,0 +1,79 @@
+{
+  "name": "Get-google-calendar-v3",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "get-google-calendar-v3",
+        "responseMode": "lastNode",
+        "responseData": "allEntries",
+        "options": {}
+      },
+      "id": "01918524-008c-4824-abe9-b0f87015be9a",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        200,
+        480
+      ],
+      "webhookId": "dbfcc0db-dc58-4574-a39a-b22b6e5edd60"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "={{ $json[\"query\"][\"calendarId\"] }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "600d76a0-7de7-47bd-acbd-baa79bc668f8",
+      "name": "Google Calendar",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.1,
+      "position": [
+        460,
+        460
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "yiF1M13T10qzvUgi",
+          "name": "Google Calendar account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "446bcb35-ea94-4d57-8640-8f03ea96c493",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ead19e1a6cc5e0d6bde0bef1bc450606d38ab2a496ca615217fa50ce4b2807a5"
+  },
+  "id": "3IDyNipCx3o74RiK",
+  "tags": [
+    {
+      "createdAt": "2024-05-03T18:43:44.774Z",
+      "updatedAt": "2024-05-03T18:43:44.774Z",
+      "id": "iCuHfJY5bSpxW90V",
+      "name": "Peluquerias V3 Get"
+    }
+  ]
+}

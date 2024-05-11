@@ -1,0 +1,118 @@
+{
+  "name": "POST-delete-event-google-v3",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "cea723d4-a895-4462-880d-fc5d0b2bd387",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "5e3c4b16-992f-4fbd-a13a-a1a30aea8c26",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        -120,
+        80
+      ],
+      "webhookId": "cea723d4-a895-4462-880d-fc5d0b2bd387"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "documentId": {
+          "__rl": true,
+          "value": "16hpBbpFffx7JhLPext35vDEvHkM4MbxfWs_UlAm5JoQ",
+          "mode": "list",
+          "cachedResultName": "database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16hpBbpFffx7JhLPext35vDEvHkM4MbxfWs_UlAm5JoQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Citas_Clientes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16hpBbpFffx7JhLPext35vDEvHkM4MbxfWs_UlAm5JoQ/edit#gid=0"
+        },
+        "startIndex": "={{ $('Webhook').item.json[\"body\"][\"row_number\"] }}"
+      },
+      "id": "ec0e7223-33cf-4fe1-ad47-0072ec3a0a8b",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.3,
+      "position": [
+        280,
+        60
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "sVTysHUmvid88adA",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "={{ $json[\"body\"][\"calendario\"] }}",
+          "mode": "id"
+        },
+        "eventId": "{{ $json[\"body\"][\"idevent\"] }}",
+        "options": {}
+      },
+      "id": "4e76774a-564e-44ce-9b85-314b14f724c3",
+      "name": "Google Calendar",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        60
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "yiF1M13T10qzvUgi",
+          "name": "Google Calendar account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e32dfbaa-2d4f-401e-8f1a-5d0c417e9882",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ead19e1a6cc5e0d6bde0bef1bc450606d38ab2a496ca615217fa50ce4b2807a5"
+  },
+  "id": "GiA6t60kJsIGTdD2",
+  "tags": []
+}
